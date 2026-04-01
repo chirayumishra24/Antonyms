@@ -89,12 +89,6 @@ export default function M1Ch2() {
     setResults(newResults)
     setScore(correctCount)
 
-    // Auto-fill all correct answers
-    setAnswers(ANTONYM_PAIRS.map((pair, i) => {
-      const isCorrect = answers[i].trim().toLowerCase() === pair.answer.toLowerCase()
-      return isCorrect ? answers[i] : pair.answer
-    }))
-
     setStage('results')
   }, [answers])
 
@@ -227,13 +221,36 @@ export default function M1Ch2() {
                     onChange={(e) => handleInputChange(i, e.target.value)}
                     onKeyDown={(e) => handleKeyDown(e, i)}
                     placeholder="Type the opposite..."
-                    disabled={results[i] === 'correct'}
+                    disabled={results[i] === 'correct' || stage === 'results'}
                     id={`quiz-input-${i}`}
                   />
                 </div>
-                <div className="quiz-row__status">
+                <div className="quiz-row__status" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                   {results[i] === 'correct' && <CheckIcon />}
-                  {results[i] === 'wrong' && <CrossIcon />}
+                  {results[i] === 'wrong' && (
+                    <>
+                      <CrossIcon />
+                      <div style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '4px',
+                        background: 'rgba(76, 175, 80, 0.2)',
+                        padding: '4px 8px',
+                        borderRadius: '6px',
+                        border: '2px solid var(--success-color)'
+                      }}>
+                        <span style={{
+                          color: 'var(--success-color)',
+                          fontFamily: 'var(--font-heading)',
+                          fontSize: '1.2rem',
+                          textTransform: 'uppercase'
+                        }}>
+                          {pair.answer}
+                        </span>
+                        <CheckIcon />
+                      </div>
+                    </>
+                  )}
                 </div>
               </div>
             ))}
