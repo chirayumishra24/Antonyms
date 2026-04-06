@@ -28,6 +28,11 @@ export function getMaleVoice() {
   return voices.find(v => v.lang.startsWith('en')) || null
 }
 
+// Spell out a word letter by letter then say it: "B. I. G. big"
+export function spellWord(word) {
+  return word.toUpperCase().split('').join('. ') + '. ' + word.toLowerCase()
+}
+
 export function speakText(text, { rate = 0.9, pitch = 0.95, onEnd, onStart } = {}) {
   if (!('speechSynthesis' in window)) return
 

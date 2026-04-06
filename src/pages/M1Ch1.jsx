@@ -3,7 +3,7 @@ import ComicNav from '../components/ComicNav'
 import SpiderManSpeech from '../components/SpiderManSpeech'
 import ComicPanel from '../components/ComicPanel'
 import ActionWord from '../components/ActionWord'
-import { speakText } from '../utils/tts'
+import { speakText, spellWord } from '../utils/tts'
 
 const FLASHCARD_PAIRS = [
   { word: 'HOT', opposite: 'COLD' },
@@ -31,7 +31,8 @@ export default function M1Ch1() {
       // Auto-speak the opposite
       setTimeout(() => {
         speakText(
-          `${FLASHCARD_PAIRS[currentCard].word} is the opposite of ${FLASHCARD_PAIRS[currentCard].opposite}!`
+          `${spellWord(FLASHCARD_PAIRS[currentCard].word)}, is the opposite of, ${spellWord(FLASHCARD_PAIRS[currentCard].opposite)}`,
+          { rate: 0.8 }
         )
       }, 600)
     }

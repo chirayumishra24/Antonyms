@@ -4,7 +4,7 @@ import SpiderManSpeech from '../components/SpiderManSpeech'
 import ComicPanel from '../components/ComicPanel'
 import ActionWord from '../components/ActionWord'
 import CustomVideoPlayer from '../components/CustomVideoPlayer'
-import { speakText } from '../utils/tts'
+import { speakText, spellWord } from '../utils/tts'
 
 const ANTONYM_PAIRS = [
   { word: 'Near', answer: 'Far' },
@@ -65,7 +65,7 @@ export default function M1Ch2() {
 
     // TTS feedback
     const msg = isCorrect
-      ? `Great job! ${ANTONYM_PAIRS[index].word} and ${ANTONYM_PAIRS[index].answer} are opposites!`
+      ? `Great job! ${spellWord(ANTONYM_PAIRS[index].word)}, and ${spellWord(ANTONYM_PAIRS[index].answer)}, are opposites!`
       : `Not quite! Try again, hero!`
     speakText(msg)
 
